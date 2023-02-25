@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PoKey.BL\PoKey.BL.csproj" />
+  </ItemGroup>
+
 </Project>
