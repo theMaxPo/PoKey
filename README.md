@@ -1,18 +1,19 @@
 # Клавиатурный тренажер⌨️
 
-## Запуск в `Docker`-е
+## Запуск в `Docker compose`-е
 
-### Создаем образ `key-image`
+### Запускаем контейнеры для базы данных и приложения(Авто создание образов)
 ```Docker
-docker build -t key-image -f Dockerfile .
+docker compose run --rm app
 ```
 
-### Запуск и подключение к контейнеру(Однократный запуск) 
+### Останавливаем контейнеры
 ```Docker
-docker run -it --rm key-image
+docker compose down
 ```
 
 ### Удаляем образ `key-image`
 ```Docker
-docker rmi key-image:latest
+docker rmi postgres
+docker rmi pokey-app
 ```

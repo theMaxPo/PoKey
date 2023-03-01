@@ -18,7 +18,7 @@ public class Trainer
     /// Прошедшее время с запуска тренажера.
     /// По завершению текущей партии время останавливается.
     /// </summary>
-    public TimeSpan ElapsedTime
+    private TimeSpan ElapsedTime
     {
         get
         {

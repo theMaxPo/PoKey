@@ -7,17 +7,41 @@ internal class Program
     private static void Main(string[] args)
     {
         var trainer = new Trainer(new Exercise("a"), new ConsoleDisplay());
+        UserConrtoller userConrtoller;
 
         Console.Clear();
+        Console.WriteLine("Добро пожаловать в клавиатурный тренажер!");
         Console.WriteLine("Нажмите любую клавишу что бы начать.");
         Console.ReadKey();
+        Console.Clear();
 
-        while (MainMenu(ref trainer)) ;
+        while (true)
+        {
+            Console.WriteLine("Введите имя");
+            Console.Write(">");
+            var name = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(name) == false)
+            {
+                userConrtoller = new UserConrtoller(name);
+                break;
+            }
+            Console.Clear();
+            Console.WriteLine("Ошибка ввода!");
+        }
+        Console.WriteLine($"{userConrtoller.User.Name}, добро пожаловать в клавиатурный тренажер!");
+
+
+        while (MainMenu(ref trainer, userConrtoller)) ;
     }
 
-    public static bool MainMenu(ref Trainer trainer)
+    public static bool MainMenu(ref Trainer trainer, UserConrtoller? userConrtoller = null)
     {
         Console.Clear();
+        if(userConrtoller is not null)
+        {
+            Console.WriteLine($"Игрок: {userConrtoller.User.Name}");
+            Console.WriteLine($"Счет:  {userConrtoller.User.OverallAccuracy}");
+        }
         Console.WriteLine("N   - новая игра");
         Console.WriteLine("R   - перезапуск текущей игры");
         Console.WriteLine("ESC - выход");
@@ -54,23 +78,23 @@ internal class Program
             case ConsoleKey.Escape:
                 break;
             case ConsoleKey.D0:
-                TrainerPlay(trainer, Exercise.Level0);
+                TrainerPlay(ref trainer, Exercise.Level0);
                 break;
             case ConsoleKey.D1:
-                TrainerPlay(trainer, Exercise.Level1);
+                TrainerPlay(ref trainer, Exercise.Level1);
                 break;
             case ConsoleKey.D2:
-                TrainerPlay(trainer, Exercise.Level2);
+                TrainerPlay(ref trainer, Exercise.Level2);
                 break;
             case ConsoleKey.D:
-                TrainerPlay(trainer, Exercise.Digital);
+                TrainerPlay(ref trainer, Exercise.Digital);
                 break;
             case ConsoleKey.F:
-                TrainerPlay(trainer, Exercise.Full);
+                TrainerPlay(ref trainer, Exercise.Full);
                 break;
         }
 
-        void TrainerPlay(Trainer trainer, Exercise exercise)
+        void TrainerPlay(ref Trainer trainer, Exercise exercise)
         {
             trainer = new Trainer(exercise, new ConsoleDisplay());
             trainer.Play();

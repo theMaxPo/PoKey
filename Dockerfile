@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 
 WORKDIR /src
 
-COPY ./src ./
+COPY ./src .
 
 RUN dotnet publish /src/PoKey.CMD/PoKey.CMD.csproj -c Release -o out
 
