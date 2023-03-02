@@ -19,9 +19,16 @@ namespace PoKey.BL.Model
         public void Save(User item)
         {
             using var db = new PoKeyContext();
-            db.Users.Add(item);
+            var user = db.Users.Where(u => u.Equals(item)).FirstOrDefault();
+            if(user is not null)
+            {
+                user.Name = item.Name;
+                user.OverallAccuracy = item.OverallAccuracy;
+                
+                // db.Update(item);
+                db.SaveChanges();
+            }
 
-            db.SaveChanges();
         }
     }
 }
