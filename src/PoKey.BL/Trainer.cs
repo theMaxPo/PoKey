@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using PoKey.BL.Model;
 
 namespace PoKey.BL;
@@ -49,15 +51,22 @@ public class Trainer
 
         Display.Start(text);
 
+        char key = default;
+
         while (text.CurrentChar != null)
         {
-            char key = Display.ReadInput();
+            Display.ProcessingInput(text, ElapsedTime);
 
-            text.CheckCharacter(key);
+            if (Console.KeyAvailable)
+            {
+                key = Display.ReadInput();
 
-            Display.ProcessingInput(text);
+                text.CheckCharacter(key);
 
-            text.MoveToNextChar();
+                Display.ProcessingInput(text);
+
+                text.MoveToNextChar();
+            }
         }
 
         finishTime = DateTime.Now;

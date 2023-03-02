@@ -39,6 +39,7 @@ internal class Program
         Console.Clear();
         if(userConrtoller is not null)
         {
+            userConrtoller.UpdataAccuracy(88);
             Console.WriteLine($"Игрок: {userConrtoller.User.Name}");
             Console.WriteLine($"Счет:  {userConrtoller.User.OverallAccuracy}");
         }

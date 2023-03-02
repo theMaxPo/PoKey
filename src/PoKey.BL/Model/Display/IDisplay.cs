@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace PoKey.BL.Model;
 public interface IDisplay
@@ -14,7 +15,7 @@ public interface IDisplay
     void ProcessingInput(Text text);
 
     /// <summary>
-    /// Вызывается ПОСЛЕ ввода каждого символа.
+    /// Вызывается постоянно после Start().
     /// </summary>
     /// <param name="time">Время прошедшее с запуска тренажера</param>
     void ProcessingInput(Text text, TimeSpan time);
