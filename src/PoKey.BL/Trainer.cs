@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
 using PoKey.BL.Model;
 
@@ -53,26 +52,33 @@ public class Trainer
 
         char key = default;
 
+        LoopAsync();
+
         while (text.CurrentChar != null)
         {
-            Display.ProcessingInput(text, ElapsedTime);
+            key = Display.ReadInput();
 
-            if (Console.KeyAvailable)
-            {
-                key = Display.ReadInput();
+            text.CheckCharacter(key);
 
-                text.CheckCharacter(key);
+            Display.ProcessingInput(text);
 
-                Display.ProcessingInput(text);
-
-                text.MoveToNextChar();
-            }
+            text.MoveToNextChar();
         }
 
         finishTime = DateTime.Now;
 
         IsFinished = true;
         Display.Finish(text, ElapsedTime);
+    }
+
+    private async Task LoopAsync() => await Task.Run(() => Loop());
+
+    private void Loop()
+    {
+        while (text.CurrentChar != null)
+        {
+            Display.Loop(text, ElapsedTime);
+        }
     }
 
     /// <summary>

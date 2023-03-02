@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 
 namespace PoKey.BL.Model;
 public interface IDisplay
@@ -15,10 +14,10 @@ public interface IDisplay
     void ProcessingInput(Text text);
 
     /// <summary>
-    /// Вызывается постоянно после Start().
+    /// Вызывается постоянно после Play().
     /// </summary>
     /// <param name="time">Время прошедшее с запуска тренажера</param>
-    void ProcessingInput(Text text, TimeSpan time);
+    void Loop(Text text, TimeSpan time);
 
     /// <summary>
     /// Вызывается ДО считавания ПЕРВОГО символа.
