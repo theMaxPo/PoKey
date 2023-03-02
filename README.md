@@ -12,7 +12,7 @@ docker compose run --rm app
 docker compose down
 ```
 
-### Удаляем образ `key-image`
+### Удаляем созданные образы
 ```Docker
 docker rmi postgres
 docker rmi pokey-app
